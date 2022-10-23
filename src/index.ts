@@ -31,7 +31,9 @@ export class CocktailDbApi {
   private fetchDataFromService = async <T>(url: string) => {
     const baseUrl = `https://www.thecocktaildb.com/api/json/v${this.version}/${this.apiKey}`;
 
-    return axios.get<T>(`${baseUrl}/${url}`);
+    const response = await axios.get<T>(`${baseUrl}/${url}`);
+
+    return response.data;
   }
 
   searchCocktailsByName = async (searchTerm: string) => {
