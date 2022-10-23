@@ -1,14 +1,11 @@
-export interface Drink {
+export interface Drink extends AbbreviatedDrink {
   "strInstructionsZH-HANS": null;
   "strInstructionsZH-HANT": null;
   dateModified: string | null;
-  idDrink: string;
   strAlcoholic: string;
   strCategory: string;
   strCreativeCommonsConfirmed: string;
-  strDrink: string;
   strDrinkAlternate: null;
-  strDrinkThumb: string;
   strGlass: string;
   strIBA: string | null;
   strImageAttribution: string | null;
@@ -50,4 +47,19 @@ export interface Drink {
   strMeasure9: null;
   strTags: string | null;
   strVideo: null;
+}
+
+export interface AbbreviatedDrink {
+  idDrink: string;
+  strDrink: string;
+  strDrinkThumb: string;
+}
+
+export interface Ingredient {
+  idIngredient:   string;
+  strABV:         string;
+  strAlcohol:     string;
+  strDescription: string;
+  strIngredient:  string;
+  strType:        string;
 }

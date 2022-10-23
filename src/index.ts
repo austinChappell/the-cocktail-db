@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { Drink } from "./types";
+import {AbbreviatedDrink, Drink, Ingredient} from "./types";
 
 type Version = 1;
 interface ConstructorArgs {
@@ -36,9 +36,91 @@ export class CocktailDbApi {
     return response.data;
   }
 
+  // List
+  listAlcoholFilters = async () => {
+    return this.fetchDataFromService<{ drinks: Pick<Drink, 'strAlcoholic'>[] }>('/list.php?a=list')
+  }
+
+  listCategoryFilters = async () => {
+    return this.fetchDataFromService<{ drinks: Pick<Drink, 'strCategory'>[] }>('/list.php?c=list')
+  }
+
+  listGlassFilters = async () => {
+    return this.fetchDataFromService<{ drinks: Pick<Drink, 'strGlass'>[] }>('/list.php?g=list')
+  }
+
+  listIngredientFilters = async () => {
+    return this.fetchDataFromService<{ drinks: Pick<Drink, 'strIngredient1'>[] }>('/list.php?i=list')
+  }
+
+  // Filter
+  filterCocktailsByAlcoholic = async (alcoholicFilter: string) => {
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?a=${alcoholicFilter}`)
+  }
+
+  filterCocktailsByCategory = async (category: string) => {
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?c=${category}`)
+  }
+
+  filterCocktailsByGlass = async (glass: string) => {
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?g=${glass}`)
+  }
+
+  filterCocktailsByIngredientName = async (ingredientName: string) => {
+    const encodedIngredientName = encodeURIComponent(ingredientName);
+
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?i=${encodedIngredientName}`)
+  }
+
+  filterCocktailsByMultipleIngredientNames = async (ingredientNames: string[]) => {
+    const encodedIngredientNames = encodeURIComponent(ingredientNames.join(','));
+
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?i=${encodedIngredientNames}`)
+  }
+
+  // Misc
+  latestCocktails = async () => {
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>('/latest.php')
+  }
+
+  popularCocktails = async () => {
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>('/popular.php')
+  }
+
+  // Lookup
+  lookupCocktailById = async (id: number) => {
+    return this.fetchDataFromService<{ drinks: [Drink | null] }>(`/lookup.php?i=${id}`)
+  }
+
+  lookupIngredientById = async (id: number) => {
+    return this.fetchDataFromService<{ ingredients: [Ingredient | null] }>(`/lookup.php?iid=${id}`)
+  }
+
+  // Random
+  randomCocktail = async () => {
+    return this.fetchDataFromService<{ drinks: [Drink | null] }>('/random.php')
+  }
+
+  randomSelectionOfCocktails = async () => {
+    return this.fetchDataFromService<{ drinks: Drink[] }>('/randomselection.php')
+  }
+
+  // Search
+  searchCocktailsByFirstLetter = async (firstLetter: string) => {
+    const encodedFirstLetter = encodeURIComponent(firstLetter);
+
+    return this.fetchDataFromService<{ drinks: Drink[] }>(`/search.php?f=${encodedFirstLetter}`)
+  }
+
   searchCocktailsByName = async (searchTerm: string) => {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
 
     return this.fetchDataFromService<{ drinks: Drink[] }>(`/search.php?s=${encodedSearchTerm}`)
+  }
+
+  searchIngredientsByName = async (searchTerm: string) => {
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+
+    return this.fetchDataFromService<{ ingredients: Ingredient[] }>(`/search.php?i=${encodedSearchTerm}`)
   }
 }
