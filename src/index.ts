@@ -89,16 +89,16 @@ export class CocktailDbApi {
 
   // Lookup
   lookupCocktailById = async (id: number) => {
-    return this.fetchDataFromService<{ drinks: [Drink] }>(`/lookup.php?i=${id}`)
+    return this.fetchDataFromService<{ drinks: Drink[] }>(`/lookup.php?i=${id}`)
   }
 
   lookupIngredientById = async (id: number) => {
-    return this.fetchDataFromService<{ ingredients: [Ingredient] }>(`/lookup.php?iid=${id}`)
+    return this.fetchDataFromService<{ ingredients: Ingredient[] }>(`/lookup.php?iid=${id}`)
   }
 
   // Random
   randomCocktail = async () => {
-    return this.fetchDataFromService<{ drinks: [Drink] }>('/random.php')
+    return this.fetchDataFromService<{ drinks: Drink[] }>('/random.php')
   }
 
   randomSelectionOfCocktails = async () => {
