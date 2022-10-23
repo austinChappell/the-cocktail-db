@@ -2,9 +2,10 @@ import axios from "axios";
 
 import { Drink } from "./types";
 
+type Version = 1;
 interface ConstructorArgs {
   apiKey: string;
-  version: number;
+  version: Version;
 }
 
 export class CocktailDbApi {
