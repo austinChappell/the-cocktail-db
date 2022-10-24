@@ -66,14 +66,14 @@ export class CocktailDbApi {
     return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?g=${glass}`)
   }
 
-  filterCocktailsByIngredientName = async (ingredientName: string) => {
-    const encodedIngredientName = encodeURIComponent(ingredientName);
+  filterCocktailsByIngredient = async (ingredient: string) => {
+    const encodedIngredientName = encodeURIComponent(ingredient);
 
     return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?i=${encodedIngredientName}`)
   }
 
-  filterCocktailsByMultipleIngredientNames = async (ingredientNames: string[]) => {
-    const encodedIngredientNames = encodeURIComponent(ingredientNames.join(','));
+  filterCocktailsByMultipleIngredients = async (ingredients: string[]) => {
+    const encodedIngredientNames = encodeURIComponent(ingredients.join(','));
 
     return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?i=${encodedIngredientNames}`)
   }
