@@ -55,27 +55,27 @@ export class CocktailDbApi {
 
   // Filter
   filterCocktailsByAlcoholic = async (alcoholicFilter: string) => {
-    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?a=${alcoholicFilter}`)
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] | null }>(`/filter.php?a=${alcoholicFilter}`)
   }
 
   filterCocktailsByCategory = async (category: string) => {
-    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?c=${category}`)
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] | null }>(`/filter.php?c=${category}`)
   }
 
   filterCocktailsByGlass = async (glass: string) => {
-    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?g=${glass}`)
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] | null }>(`/filter.php?g=${glass}`)
   }
 
   filterCocktailsByIngredient = async (ingredient: string) => {
     const encodedIngredientName = encodeURIComponent(ingredient);
 
-    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?i=${encodedIngredientName}`)
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] | null }>(`/filter.php?i=${encodedIngredientName}`)
   }
 
   filterCocktailsByMultipleIngredients = async (ingredients: string[]) => {
     const encodedIngredientNames = encodeURIComponent(ingredients.join(','));
 
-    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] }>(`/filter.php?i=${encodedIngredientNames}`)
+    return this.fetchDataFromService<{ drinks: AbbreviatedDrink[] | null }>(`/filter.php?i=${encodedIngredientNames}`)
   }
 
   // Misc
@@ -89,11 +89,11 @@ export class CocktailDbApi {
 
   // Lookup
   lookupCocktailById = async (id: number) => {
-    return this.fetchDataFromService<{ drinks: Drink[] }>(`/lookup.php?i=${id}`)
+    return this.fetchDataFromService<{ drinks: Drink[] | null }>(`/lookup.php?i=${id}`)
   }
 
   lookupIngredientById = async (id: number) => {
-    return this.fetchDataFromService<{ ingredients: Ingredient[] }>(`/lookup.php?iid=${id}`)
+    return this.fetchDataFromService<{ ingredients: Ingredient[] | null }>(`/lookup.php?iid=${id}`)
   }
 
   // Random
@@ -109,18 +109,18 @@ export class CocktailDbApi {
   searchCocktailsByFirstLetter = async (firstLetter: string) => {
     const encodedFirstLetter = encodeURIComponent(firstLetter);
 
-    return this.fetchDataFromService<{ drinks: Drink[] }>(`/search.php?f=${encodedFirstLetter}`)
+    return this.fetchDataFromService<{ drinks: Drink[] | null }>(`/search.php?f=${encodedFirstLetter}`)
   }
 
   searchCocktailsByName = async (searchTerm: string) => {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
 
-    return this.fetchDataFromService<{ drinks: Drink[] }>(`/search.php?s=${encodedSearchTerm}`)
+    return this.fetchDataFromService<{ drinks: Drink[] | null }>(`/search.php?s=${encodedSearchTerm}`)
   }
 
   searchIngredientsByName = async (searchTerm: string) => {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
 
-    return this.fetchDataFromService<{ ingredients: Ingredient[] }>(`/search.php?i=${encodedSearchTerm}`)
+    return this.fetchDataFromService<{ ingredients: Ingredient[] | null }>(`/search.php?i=${encodedSearchTerm}`)
   }
 }
