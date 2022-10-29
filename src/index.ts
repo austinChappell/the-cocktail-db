@@ -2,9 +2,9 @@ import axios from "axios";
 
 import {AbbreviatedDrink, Drink, Ingredient} from "./types";
 
-type Version = 1;
+type Version = 1 | 2;
 interface ConstructorArgs {
-  apiKey: string;
+  apiKey: number;
   version: Version;
 }
 
@@ -25,7 +25,7 @@ export class CocktailDbApi {
     this.version = version;
   }
 
-  private readonly apiKey: string;
+  private readonly apiKey: number;
   private readonly version: number;
 
   private fetchDataFromService = async <T>(url: string) => {
