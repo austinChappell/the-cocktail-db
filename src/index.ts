@@ -13,8 +13,8 @@ export class CocktailDbApi {
     apiKey,
     version,
   }: ConstructorArgs) {
-    if (version !== 1) {
-      throw new Error('Unsupported version number. The supported version number is: 1');
+    if (version !== 1 && version !== 2) {
+      throw new Error('Unsupported version number. The supported version numbers are: 1 or 2');
     }
 
     if (!apiKey) {
