@@ -8,6 +8,8 @@ interface ConstructorArgs {
   version: Version;
 }
 
+export * from './types';
+
 export class CocktailDbApi {
   constructor({
     apiKey,
